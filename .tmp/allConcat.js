@@ -18,7 +18,7 @@ $(document).ready(function() {
 		$.get("https://api.github.com/users/" + userQuery + "/repos?access_token=" + gitApiToken).then(function(response) {
 			$('#avatar, #owner-info, .repositories, .repo').empty();
 			
-			var newGet = new GetUser(response)
+			var newGet = new GetUser(response);
 			var avatar = newGet.avatar;
 			var owner = newGet.owner;
 			var gitLink = newGet.gitLink;
@@ -39,7 +39,7 @@ $(document).ready(function() {
 			}
 
 			if (response.length === 0) {
-				$('.repositories').append("<h3> This user does not have any recent repos or they are private, please try another user name") 
+				$('.repositories').append("<h3> This user does not have any recent repos or they are private, please try another user name"); 
 			} else {
 				var index = 0;
 				repos.forEach(function() {
@@ -48,8 +48,8 @@ $(document).ready(function() {
 						var name = response[index].name;
 						var clone = response[index].clone_url;
 						$('.repo').last().append("<h3 class='repo-name'></h3>");
-						$('.repo').last().append("<p class='desc'></p>");
-						$('.repo').last().append("<p class='clone'></p>");
+						.append("<p class='desc'></p>");
+						.append("<p class='clone'></p>");
 						$('.repo-name').last().text(name);
 						if (desc !== " " && desc !== "" && desc !== undefined) {	
 							$('.desc').last().text(desc);

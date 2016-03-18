@@ -32,3 +32,9 @@
   }
 }
 
+@mixin background-style {
+  background-color: $color-main-dark;
+  color: $color-main-light;
+  border-radius: $radius; 
+}
+

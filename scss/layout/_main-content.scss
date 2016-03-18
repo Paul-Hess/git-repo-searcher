@@ -1,0 +1,17 @@
+.repositories {
+	width: 90vw;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	.repo {
+		width: 90vw;
+		@include background-style;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		box-shadow: $shadow;
+		background: rgba(0,0,0, .7);
+	}
+}

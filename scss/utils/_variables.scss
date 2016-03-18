@@ -14,10 +14,14 @@ $text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvet
 /// @type List
 $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
 
+$radius: 4px;
+
+$shadow: 2px -2px rgba(0,0,0, .4);
 
 
+$color-main-dark: rgba(0,0,0, .5);
 
-
+$color-main-light: rgba(#FFFFCC, .9);
 /// Copy text color
 /// @type Color
 $text-color: rgb(34, 34, 34) !default;

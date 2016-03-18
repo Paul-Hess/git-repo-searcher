@@ -1,3 +1,62 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
+.main-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	@include background-style;
+	h3 {
+		padding: 0 1em;
+	}
+}
+
+#get-user {
+	margin: 0 1em;
+	display: flex;
+	flex-direction: column;
+	#user-query {
+		border: .4px inset black;
+		transition: all .2s linear;
+		color: $color-main-dark;
+		&:focus {
+			transform: scale(1.2);
+		}
+	}
+
+ button, input {
+		margin-left: 1em;
+	}
+
+	button {
+		background: black;
+		border: none;
+		border-radius: $radius;
+		border: .4px inset $color-main-light;
+		margin-bottom: 1em;
+	}
+}
+
+	.header-nav {
+		display: flex;
+		justify-content: flex-end;
+		background: rgba(0, 0, 0, .3);
+		a {
+			padding: .5em;
+			border: 2px solid $color-main-dark;
+			border-radius: $radius;
+		}
+	}
+
+.git-user {
+	display: flex;
+	@include background-style;
+	#avatar {
+		flex: .5 .5 50%;
+		width: 30vw;
+		.profile-img {
+			max-width: 100%;
+		}
+	}
+}
+

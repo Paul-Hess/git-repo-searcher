@@ -38,9 +38,9 @@ $(document).ready(function() {
 						var desc = response[index].description;
 						var name = response[index].name;
 						var clone = response[index].clone_url;
-						$('.repo').last().append("<h3 class='repo-name'></h3>");
-						$('.repo').last().append("<p class='desc'></p>");
-						$('.repo').last().append("<p class='clone'></p>");
+						$('.repo').last().append("<h3 class='repo-name'></h3>")
+						.append("<p class='desc'></p>")
+						.append("<p class='clone'></p>");
 						$('.repo-name').last().text(name);
 						if (desc !== " " && desc !== "" && desc !== undefined) {	
 							$('.desc').last().text(desc);
