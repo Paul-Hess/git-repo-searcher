@@ -1,7 +1,7 @@
-var gitApiToken = require('./../.env').gitApiToken;
 
-exports.GetUser = function(query) {
+
+exports.GetUser = function(query, token) {
 	this.requestUrl = "https://api.github.com/users/";
-	this.token = "?access_token=" + gitApiToken;
-	this.request = this.requestUrl + query + this.token;
+	this.basicRequest = this.requestUrl + query + "/repos";
+	this.request = this.basicRequest + token;
 };
