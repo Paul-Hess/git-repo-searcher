@@ -14,27 +14,48 @@ $(document).ready(function() {
 			$('#avatar').empty();
 			$('#owner-info').empty();
 			var avatar = response[0].owner.avatar_url;
-			var name = response[0].name;
 			var owner = response[0].owner.login;
 			var gitLink = response[0].owner.html_url;
 			var gistUrl = response[0].gist_url;
 			console.log(response);
 			console.log(name);
-			console.log(response[0].description);
 			console.log(response[0].clone_url);
 			console.log(response.length);
-			if ( avatar !== " " && avatar !== "") {
+			var repos = response.splice(0, 12);
+			console.log(repos.length + "foobar");
+			if ( avatar !== " " && avatar !== "" && avatar !== undefined) {
 				$('#avatar').prepend('<img class="profile-img" src=' + avatar + '>');
 			} else {
 					$('#avatar').prepend('<img src="./../assets/img/git-default.png"' );
-			};
+			}
 
 			$('#owner-info').append('<h2>' + owner + "</h2>")
 			.append('<a href=' + gitLink + "> git page for " + owner + "</a>");
 
 			if (gistUrl !== " " && gistUrl !== "" && gistUrl !== undefined) {		
 				$('#owner-info').append('<a href=' + gistUrl  + "> gist page for " + owner + "</a>");
-			};
+			}
+
+
+			var index = 0;
+			repos.forEach(function() {
+				$('.repositories').append('<div class="repos"><div>');
+					var desc = response[index].description;
+					var name = response[index].name;
+					$('.repos').last().append("<p class='desc'></p>")
+					.append("<h3 class='repo-name'></h3>");
+					// $('.repo-name').
+					if (desc !== " " && desc !== "" && desc !== undefined) {	
+						$('.desc').last().text(desc);
+					} else {
+						$('.desc').last().text("no description provided");
+					}
+					index++;
+			});
+
+		
+			
+
 			
 
 		}).fail(function(error) {
