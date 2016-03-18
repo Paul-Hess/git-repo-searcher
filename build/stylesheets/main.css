@@ -440,4 +440,7 @@ body {
   position: absolute;
   width: 1px; }
 
+.test-text {
+  border: 1px solid black; }
+
 /*# sourceMappingURL=main.css.map */
