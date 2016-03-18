@@ -11,28 +11,39 @@ _git repo search is an exercise in using JavaScript with dev tools like node, gu
 ## Setup and Installation Requirements
 
 
-In your terminal:
-Clone the repo.
-Make sure you have node installed: node --version
-Download it here: [node](https://nodejs.org/en/download/)
-Make sure you have Bower installed: bower --version
-sudo npm install bower -g [bower](bower.io)
-make sure you have gulp installed: gulp --version
-sudo npm install gulp -g
+    In your terminal:
 
-npm init
-bower install
+    Clone the repo.
+
+    Make sure you have node installed: node --version
+
+Download it here: [node](https://nodejs.org/en/download/)
+
+    Make sure you have Bower installed: bower --version
+
+sudo npm install bower -g [bower](bower.io)
+
+    Make sure you have gulp installed: gulp --version
+
+    sudo npm install gulp -g
+
+    npm init
+
+    bower install
 
 create a github [personal key](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)
-create a new file in the base of the directory called .env
-in that file create a variable: exports.gitApiKey = "f43s34EXAMPLEAPIKEY32487kjlk8";
 
-back in the terminal run: gulp build
-then: gulp serve
+    create a new file in the base of the directory called .env
 
-this will automatically run a local file in your default browser and open the root "index.html" in it. 
+    in that file create a variable: exports.gitApiKey = "f43s34EXAMPLEAPIKEY32487kjlk8";
 
-explore!
+    back in the terminal run: gulp build
+
+    then: gulp serve
+
+    this will automatically run a local file in your default browser and open the root "index.html" in it. 
+
+####explore!
 
 
     
