@@ -9,6 +9,7 @@ var gulp = require('gulp');
  	lib = require('bower-files')(),
  	browserSync = require('browser-sync').create(),
  	mocha = require('gulp-mocha'),
+ 	sass = require('gulp-sass'),
  	sourcemaps = require('gulp-sourcemaps');
 var buildProduction = utilities.env.production;
 
@@ -20,11 +21,20 @@ gulp.task('bowerJS', function() {
 	.pipe(gulp.dest('./build/js'));
 });
 
+gulp.task('cssBuild', function() {
+  return gulp.src('scss/*.scss')
+  .pipe(sourcemaps.init()) 
+  .pipe(sass())
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest('./build/stylesheets'))
+  .pipe(browserSync.stream());
+})
+
+//run mocha testing with the command line via gulp.
 gulp.task('test', function() {
 	return gulp.src('./spec/specs.js', {read: false})
 	.pipe(mocha({reporter: 'nyan'}));
 });
-
 
 
 // run vendor builds in one task
@@ -99,6 +109,7 @@ gulp.task('serve', function() {
 	gulp.watch(['js/*.js'], ['test', 'jsBuild']);
 	gulp.watch(['bower.json'], ['bowerBuild']);
 	gulp.watch(['*.html'], ['htmlBuild']);
+	gulp.watch(["scss/*.scss"], ['cssBuild']);
 });
 
 

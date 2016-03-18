@@ -3,37 +3,31 @@ exports.gitApiToken = '5ca2c1904ca9946766a4a863ebfc84bafa6bbfa4';
 },{}],2:[function(require,module,exports){
 
 
-exports.GetUser = function(query, token) {
-	this.requestUrl = "https://api.github.com/users/";
-	this.basicRequest = this.requestUrl + query + "/repos";
-	this.request = this.basicRequest + token;
+exports.GetUser = function(response) {
+	this.avatar = response[0].owner.avatar_url;
+	this.owner = response[0].owner.login;
+	this.gitLink = response[0].owner.html_url;
+	this.gistUrl = response[0].gist_url;
 };
 
 var gitApiToken = require('./../.env').gitApiToken;
 var GetUser = require('./../js/scripts.js').GetUser;
 
 $(document).ready(function() {
-
 	$('#get-user').submit(function(event) {
 		event.preventDefault();
 		var userQuery = $('#user-query').val();
-		var token = "\?access_token=" + gitApiToken;
-		var newGitCall = new GetUser(userQuery, token);
-		console.log('foo');
 
-		$.get(newGitCall.request).then(function(response) {
-			$('#avatar').empty();
-			$('#owner-info').empty();
-			var avatar = response[0].owner.avatar_url;
-			var owner = response[0].owner.login;
-			var gitLink = response[0].owner.html_url;
-			var gistUrl = response[0].gist_url;
-			console.log(response);
-			console.log(name);
-			console.log(response[0].clone_url);
-			console.log(response.length);
+		$.get("https://api.github.com/users/" + userQuery + "/repos?access_token=" + gitApiToken).then(function(response) {
+			$('#avatar, #owner-info, .repositories, .repo').empty();
+			
+			var newGet = new GetUser(response)
+			var avatar = newGet.avatar;
+			var owner = newGet.owner;
+			var gitLink = newGet.gitLink;
+			var gistUrl = newGet.gistUrl;
 			var repos = response.splice(0, 12);
-			console.log(repos.length + "foobar");
+
 			if ( avatar !== " " && avatar !== "" && avatar !== undefined) {
 				$('#avatar').prepend('<img class="profile-img" src=' + avatar + '>');
 			} else {
@@ -47,33 +41,32 @@ $(document).ready(function() {
 				$('#owner-info').append('<a href=' + gistUrl  + "> gist page for " + owner + "</a>");
 			}
 
-
-			var index = 0;
-			repos.forEach(function() {
-				$('.repositories').append('<div class="repos"><div>');
-					var desc = response[index].description;
-					var name = response[index].name;
-					$('.repos').last().append("<p class='desc'></p>")
-					.append("<h3 class='repo-name'></h3>");
-					// $('.repo-name').
-					if (desc !== " " && desc !== "" && desc !== undefined) {	
-						$('.desc').last().text(desc);
-					} else {
-						$('.desc').last().text("no description provided");
-					}
-					index++;
-			});
-
-		
-			
-
-			
-
+			if (response.length === 0) {
+				$('.repositories').append("<h3> This user does not have any recent repos or they are private, please try another user name") 
+			} else {
+				var index = 0;
+				repos.forEach(function() {
+					$('.repositories').append('<div class="repo"><div>');
+						var desc = response[index].description;
+						var name = response[index].name;
+						var clone = response[index].clone_url;
+						$('.repo').last().append("<h3 class='repo-name'></h3>");
+						$('.repo').last().append("<p class='desc'></p>");
+						$('.repo').last().append("<p class='clone'></p>");
+						$('.repo-name').last().text(name);
+						if (desc !== " " && desc !== "" && desc !== undefined) {	
+							$('.desc').last().text(desc);
+						} else {
+							$('.desc').last().text("no description provided");
+						}
+						$('.clone').last().text("clone this repo: " + clone);
+						index++;
+				});
+			}
 		}).fail(function(error) {
 			response = error.responseJSON.messsage;
 		}); //end get.
 	}); //end submit.	
-
 }); //end doc ready
 
 
@@ -81,10 +74,11 @@ $(document).ready(function() {
 },{"./../.env":1,"./../js/scripts.js":3}],3:[function(require,module,exports){
 
 
-exports.GetUser = function(query, token) {
-	this.requestUrl = "https://api.github.com/users/";
-	this.basicRequest = this.requestUrl + query + "/repos";
-	this.request = this.basicRequest + token;
+exports.GetUser = function(response) {
+	this.avatar = response[0].owner.avatar_url;
+	this.owner = response[0].owner.login;
+	this.gitLink = response[0].owner.html_url;
+	this.gistUrl = response[0].gist_url;
 };
 
 },{}]},{},[2]);
